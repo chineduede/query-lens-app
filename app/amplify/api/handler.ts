@@ -1,14 +1,11 @@
 import type { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import serverless from 'serverless-http';
-import { ExpressApiSetup } from './router';
+import api from './api-handler/router';
 
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
-  const app = ExpressApiSetup();
-  const serverlessApp = serverless(app);
+export const handler: APIGatewayProxyHandlerV2 = async (event, context) => {
+  context.callbackWaitsForEmptyEventLoop = true;
 
-  app.locals.event = event;
-  const response = await serverlessApp(event, {});
-
+  const response = await api.run(event, context);
+  console.log(response);
   return {
     statusCode: 200,
     // Modify the CORS settings below to match your specific requirements
