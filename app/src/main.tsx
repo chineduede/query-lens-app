@@ -11,24 +11,24 @@ import "@aws-amplify/ui-react/styles.css";
 Amplify.configure(outputs);
 const existingConfig = Amplify.getConfig();
 
-const session = await fetchAuthSession();
-const token = session.tokens?.accessToken.toString();
-
-Amplify.configure({
-  ...existingConfig,
-  API: {
-    ...existingConfig.API,
-    REST: outputs.custom.API,
-  },
-}, {
-  API: {
-    REST: {
-      headers: async () => ({
-        Authorization: `Bearer ${token}`,
-      }),
+void fetchAuthSession().then((session) => {
+  const token = session.tokens?.accessToken.toString();
+  Amplify.configure({
+    ...existingConfig,
+    API: {
+      ...existingConfig.API,
+      REST: outputs.custom.API,
     },
-  },
-});
+  }, {
+    API: {
+      REST: {
+        headers: async () => ({
+          Authorization: `Bearer ${token}`,
+        }),
+      },
+    },
+  });
+})
 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
