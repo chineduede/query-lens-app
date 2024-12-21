@@ -28,3 +28,6 @@ dist-ssr
 amplify_outputs*
 amplifyconfiguration*
 node_modules
+
+# vite
+.vite

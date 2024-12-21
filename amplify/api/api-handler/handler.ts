@@ -1,6 +1,6 @@
 import type { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import serverless from 'serverless-http';
-import { ExpressApiSetup } from './express';
+import { ExpressApiSetup } from './router';
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const app = ExpressApiSetup();

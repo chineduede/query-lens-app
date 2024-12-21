@@ -1,17 +1,5 @@
-import express from 'express';
-import helmet from 'helmet';
-import router from './routes';
+import createApi from 'lambda-api';
 
-let app: express.Application;
+const api = createApi({version: 'v1'});
 
-export function ExpressApiSetup(): express.Application {
-  if (app) {
-    return app;
-  }
-
-  app = express();
-
-  app.use('*', router);
-  app.use(helmet());
-  return app;
-}
+export default api;
