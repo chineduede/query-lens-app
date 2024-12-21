@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { ConfigManager } from "./ConfigManager";
 
 export class NamingStrategy {
